@@ -5,7 +5,8 @@ public class CodificadorFactory {
     public static Codificador getCodificador(int nivelDesejado) {
         Codificador[] codificadores = {
             new CodificadorSimples(),//ir adicionando a baixo new "nome do codicador" (),
-            new CodificadorReversoAlternado()
+            new CodificadorReversoAlternado(),
+            new CodificadorEnigmaSimples()
             
         };
 
