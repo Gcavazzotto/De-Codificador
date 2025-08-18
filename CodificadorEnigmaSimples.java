@@ -21,63 +21,12 @@ public class CodificadorEnigmaSimples implements Codificador{
 
     // Recebe um string e retorna o correspondente codificado
     public String codifica(String str){
-        //Instancia saída
-        StringBuilder saida = new StringBuilder();
-
-        //Para cada letra da mensagem recebida
-        for (char letra : str.toCharArray()) {
-            if (ABC.indexOf(letra) == -1) continue; // ignora caracteres fora do alfabeto
-
-            int pos = ABC.indexOf(letra);
-
-            // ---- ida ----
-            pos = rotorIda(II, pos);
-            pos = rotorIda(IV, pos);
-            pos = rotorIda(V, pos);
-
-            // ---- refletor ----
-            char refletida = refletor.get(ABC.charAt(pos));
-            pos = ABC.indexOf(refletida);
-
-            // ---- volta ----
-            pos = rotorVolta(V, pos);
-            pos = rotorVolta(IV, pos);
-            pos = rotorVolta(II, pos);
-
-            saida.append(ABC.charAt(pos));
-        }
-        return saida.toString();
+        return executaCodEDecod(str);
     }
 
     // Recebe um string codificado e retorna o correspondente decodificado
     public String decodifica(String str){
-        //Instancia saída
-        StringBuilder saida = new StringBuilder();
-
-        //Para cada letra da mensagem recebida
-        for (char letra : str.toCharArray()) {
-            if (ABC.indexOf(letra) == -1) continue; // ignora caracteres fora do alfabeto
-
-            int pos = ABC.indexOf(letra);
-
-            // ---- ida ----
-            pos = rotorIda(II, pos);
-            pos = rotorIda(IV, pos);
-            pos = rotorIda(V, pos);
-
-            // ---- refletor ----
-            char refletida = refletor.get(ABC.charAt(pos));
-            pos = ABC.indexOf(refletida);
-
-            // ---- volta ----
-            pos = rotorVolta(V, pos);
-            pos = rotorVolta(IV, pos);
-            pos = rotorVolta(II, pos);
-
-            saida.append(ABC.charAt(pos));
-        }
-
-        return saida.toString();
+        return executaCodEDecod(str);
     }
     
     static String ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -113,6 +62,36 @@ public class CodificadorEnigmaSimples implements Codificador{
         refletor.put('M', 'O'); refletor.put('O', 'M');
         refletor.put('T', 'Z'); refletor.put('Z', 'T');
         refletor.put('V', 'W'); refletor.put('W', 'V');
+    }
+
+    public static String executaCodEDecod(String str){
+        //Instancia saída
+        StringBuilder saida = new StringBuilder();
+
+        //Para cada letra da mensagem recebida
+        for (char letra : str.toCharArray()) {
+            if (ABC.indexOf(letra) == -1) continue; // ignora caracteres fora do alfabeto
+
+            int pos = ABC.indexOf(letra);
+
+            // ---- ida ----
+            pos = rotorIda(II, pos);
+            pos = rotorIda(IV, pos);
+            pos = rotorIda(V, pos);
+
+            // ---- refletor ----
+            char refletida = refletor.get(ABC.charAt(pos));
+            pos = ABC.indexOf(refletida);
+
+            // ---- volta ----
+            pos = rotorVolta(V, pos);
+            pos = rotorVolta(IV, pos);
+            pos = rotorVolta(II, pos);
+
+            saida.append(ABC.charAt(pos));
+        }
+
+        return saida.toString();
     }
 
 }
