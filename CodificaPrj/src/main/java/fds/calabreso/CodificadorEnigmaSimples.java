@@ -4,49 +4,38 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CodificadorEnigmaSimples implements Codificador{
-    // Retorna o nome do codificador
-    public String getNome(){
+public class CodificadorEnigmaSimples implements Codificador {
+    public String getNome() {
         return "Codificador Enigma Simples (Rotores II, IV e V, Refletor B)";
     }
 
-    // Retorna a data de imlementação do codificador (pode ser usado como versao)
-    public LocalDate getDataCriacao(){
+    public LocalDate getDataCriacao() {
         return LocalDate.of(2025, 8, 17);
     }
 
-    // Retorna o nivel de segurança do codificador (1 = muito baixo, 100 = muito alto)
-    public int getNivelSeguranca(){
-        return 25; //Ver depois se é válido assim
+    public int getNivelSeguranca() {
+        return 25;
     }
 
-
-    // Recebe um string e retorna o correspondente codificado
-    public String codifica(String str){
+    public String codifica(String str) {
         return executaCodEDecod(str);
     }
 
-    // Recebe um string codificado e retorna o correspondente decodificado
-    public String decodifica(String str){
+    public String decodifica(String str) {
         return executaCodEDecod(str);
     }
-    
+
     static String ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
     static String II = "JDKSIRUXBLHWTMCQGZNPYFVOEA";
-    
     static String IV = "BESOVPZJAYQUIRHXLMFTGKDCMW";
-                        
     static String V  = "OFECKVZBRGITYUPSDNHLXAWMJQ";
-    
+
     static int rotorIda(String rotor, int pos) {
-        char letra = rotor.charAt(pos);
-        return ABC.indexOf(letra);
+        return ABC.indexOf(rotor.charAt(pos));
     }
 
     static int rotorVolta(String rotor, int pos) {
-        char letra = ABC.charAt(pos);
-        return rotor.indexOf(letra);
+        return rotor.indexOf(ABC.charAt(pos));
     }
 
     static Map<Character, Character> refletor = new HashMap<>();
@@ -66,17 +55,24 @@ public class CodificadorEnigmaSimples implements Codificador{
         refletor.put('V', 'W'); refletor.put('W', 'V');
     }
 
-    public static String executaCodEDecod(String str){
+    public static String executaCodEDecod(String str) {
+        String mensagem = str.toUpperCase();
+
         //Instancia saída
         StringBuilder saida = new StringBuilder();
 
-        //Para cada letra da mensagem recebida
-        for (char letra : str.toCharArray()) {
-            if (ABC.indexOf(letra) == -1) continue; // ignora caracteres fora do alfabeto
+         //Para cada letra da mensagem recebida
+        for (char letra : mensagem.toCharArray()) {
+            if (letra == ' ') {
+                saida.append(' ');
+                continue;
+            } else if (ABC.indexOf(letra) == -1) {
+                continue;
+            }
 
             int pos = ABC.indexOf(letra);
 
-            // ---- ida ----
+              // ---- ida ----
             pos = rotorIda(II, pos);
             pos = rotorIda(IV, pos);
             pos = rotorIda(V, pos);
@@ -95,5 +91,4 @@ public class CodificadorEnigmaSimples implements Codificador{
 
         return saida.toString();
     }
-
 }

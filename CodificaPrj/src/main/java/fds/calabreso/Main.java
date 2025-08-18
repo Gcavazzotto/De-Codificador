@@ -2,7 +2,7 @@ package fds.calabreso;
 
 public class Main {
     public static void main(String[] args) {
-        String texto = "Hello World";
+        String texto = "cavazzo";
 
         Codificador c1 = CodificadorFactory.getCodificador(1);
         Codificador c2 = CodificadorFactory.getCodificador(30);
