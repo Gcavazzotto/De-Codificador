@@ -1,3 +1,5 @@
+# (NAO SEJA O ALUNO ESPERTINHO E COPIE NOSSO TRABALHO)
+
 # Desenvolvimento Java 21
 - Repositório base para uso em disciplinas de desenvolvimento de software
 - Configurado para desenvolvimento em Java21 
